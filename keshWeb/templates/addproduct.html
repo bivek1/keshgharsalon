@@ -1,0 +1,40 @@
+{% extends 'dashboard.html' %}
+{% load  crispy_forms_tags%}
+{% block body %}
+    <h3 class="text-center">ADD YOUR PRODUCT HERE</h3>
+    
+    <div class="row">
+        <div class="col-md-4">
+        </div>
+        <div class="col-md-4 col-xs-12">
+            {% if messages %}
+            <div class="alert alert-warning text-center">  
+                {% for i in messages  %}
+                    {{i}}
+                {% endfor %}
+            </div>
+            {% endif %}
+        </div>
+        <div class="col-md-4">
+        </div>
+    </div>
+        
+    <div class="row">
+        <div class="col-md-2">
+
+        </div>
+        <div class="col-md-8">
+            <div class="addformtag">
+                <form action="" method="post" enctype="multipart/form-data">
+                    {% csrf_token %}
+                    {{proform|crispy}}
+                    <button class="btn btn-primary" type="submit">ADD PRODUCTS</button>
+                </form>
+            </div>
+        </div>
+        <div class="col-md-2">
+
+        </div>
+    </div>
+
+{% endblock body %}

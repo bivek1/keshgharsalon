@@ -1,0 +1,66 @@
+{% extends 'index.html' %}
+{% load crispy_forms_tags %}
+{% block navbar %}
+<nav class="navbar navbar-default navbar-fixed-top">
+    <div class="container">
+      <div class="navbar-header">
+        <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar">
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>                        
+        </button>
+        {% block brandtitle %}
+        <a class="navbar-brand" href="{%url 'home'%}">
+          KESH GHAR
+        </a>  
+        {% endblock brandtitle %}
+      </div>
+      <div class="collapse navbar-collapse" id="myNavbar">
+        <ul class="nav navbar-nav navbar-right">
+          <li><a href="{%url 'home'%}">ABOUT</a></li>
+          <li><a href="{%url 'home'%}">SERVICES</a></li>
+          <li><a href="{%url 'home'%}">PRODUCT</a></li>
+          <li><a href="{%url 'home'%}">PRICING</a></li>
+          <li><a href="{%url 'home'%}">CONTACT</a></li>
+                
+        {% block loginsection %}
+        <li><a href="#login">LOGIN</a></li>
+        {% endblock loginsection %}
+        </ul>
+      </div>
+    </div>
+  </nav>
+  <div class="navbarmaintain">
+
+  </div>
+{% endblock navbar %}  
+
+{% block body %}
+<br><br>
+  <div class="container" id="login">
+    <div class="text-center">
+        
+        <h3>User have to login to access Dashboard</h3>
+        <div class="row">
+          <div class="col-lg-2 col-xs-2">
+
+          </div>
+          <div class="col-md-8 col-xs-8 logindiv text-center">
+            <span class="glyphicon glyphicon-user glyphicon-lg"></span>
+            <form method="post">
+              {% csrf_token %}
+              {{ form|crispy }}
+              <button type="submit" class="btn btn-danger btn-block">Login</button>
+            </form>
+          </div>
+          <div class="col-lg-2 col-xs-2">
+
+          </div>
+        </div>
+    </div>
+  </div>
+{% endblock body %}
+
+</body>
+</html>
+    

@@ -1,0 +1,168 @@
+{% extends 'dashboard.html' %}
+{%load crispy_forms_tags%}
+{% block body %} 
+        <div class="text-center">
+            <a href="{%url 'addstaff'%}">
+                <p class="btn btn-danger"> ADD STAFF </p> 
+            </a>
+        </div> 
+        {% if message.tags%}
+            <div class="alert alert-info">
+                {{message}}
+            </div>
+        {% endif %}   
+        <div class="container" id="member">
+            <div class="text-center">
+                <h1>Welcome to Member DashBoard of KESH GHAR</h1>
+            </div>
+                    <!-- birthday section -->
+        <div class="my-auto w-100">
+            <div class="alert alert-info text-center alert-dismissible">
+                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+                Today date is: {{ti}} <br>
+                {% for i in da %}
+                {% if ti.month == i.date_of_birth.month and ti.day == i.date_of_birth.day %}
+                    <p> <strong>{{i.name}} birthday today</strong></p> 
+                {% endif %}  
+                {% endfor %}
+                <a href="#"class="text-center" data-toggle="modal" data-target="#myModal">See KeshGhar member upcomming birthday</a> 
+               
+                <!-- Modal -->
+                <div class="modal fade" id="myModal" role="dialog">
+                    <div class="modal-dialog modal-lg">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal">&times;</button>
+                        <h4 class="modal-title">Birthday List</h4>
+                        </div>
+                        <div class="modal-body">
+                            <h1 class="text-center"> Your members upcomming birthday list</h1>
+                            <div class="row">
+                                <div class="col-lg-2 col-xs-2">
+                        
+                                </div>
+
+                                {% if memData %}
+                                <div class="col-lg-8 col-xs-8">
+                                    {% for i in da %}    
+                                        <div class="alert alert-info text-center">
+                                            
+                                            {{i.name}} has birthday on {{i.date_of_birth}}
+                                        </div> 
+                                     {% endfor %}
+                                </div>
+                                {% else %}
+                                    <H3 class="bg-warning">"Sorry! You don't have any user at this moment"</H3>
+                                {% endif %}
+                                <div class="col-lg-2 col-xs-2">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="modal-footer">
+                        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                        </div>
+                    </div>
+                    </div>
+                </div>          
+            </div> 
+            </div>
+            <div class="row">
+                <div class="col-md-4">
+                </div>
+                <div class="col-md-4 col-xs-12">
+                    {% if messages %}
+                    <div class="alert alert-warning text-center">  
+                        {% for i in messages  %}
+                            {{i}}
+                        {% endfor %}
+                    </div>
+            {% endif %}
+                </div>
+                <div class="col-md-4">
+                </div>
+            </div>                
+            <div class="row">
+                <div class="col-xs-12">
+                    <p class="text-center">Add Members</p>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-lg-4">
+
+                </div>
+                <div class="col-lg-4 col-xs-12 addmem">
+                    <form action="" method="post">
+                        {% csrf_token %}
+                        {{memberform|crispy}}
+                        <button type="submit" class="btn btn-primary btn-block">ADD MEMBER</button>
+                    </form>
+                </div>
+                <div class="col-lg-4">
+
+                </div>
+            </div>
+            <br>
+            {% if memData %}
+            <div class="text-center">
+                <p>Here is your member list</p>
+            </div>
+
+            <div class="table-responsive">
+                <table class="table table-striped table-hover table-bordered">
+                    <thead>
+                        <tr>
+                            <th>Member Name</th>
+                            <th>Gender</th>
+                            <th>Member Type</th>
+                            <th>Birthday date</th>
+                            <th>KeshGhar Joined date</th>
+                            <th>Delete Member</th>
+                        </tr> 
+                        {% for mem in memData %}
+                            <tbody>
+                                <tr>
+                                    <td>{{mem.name}}</td>
+                                    <td>{{mem.cust_type}}</td>
+                                    <td>{{mem.gender}}</td>
+                                    <td>{{mem.date_of_birth}}</td>
+                                    <td>{{mem.date_added}}</td>
+                                    <td> 
+                                        <form action="/deletemember/{{mem.id}}" method="post"> {% csrf_token %}
+                                            <button type="submit" class="btn btn-danger" id="popupdel" data-toggle="modal" data-target="#DelmyModal">Delete Member
+                                            </button>
+                                        </form>
+                                    </td>            
+                                </tr>
+                            </tbody> 
+                        {% endfor %}       
+                    </thead>
+                </table>    
+            {% endif %}
+            </div>
+        </div>
+        <div class="container">
+            <div class="row">
+                <div class="col-md-4 col-xs-4">
+                    
+                    {% if memData.has_previous %}
+                    <a href="?page={{memData.previous_page_number}}">
+                        <button class="btn btn-danger" type="submit">Previous</button>
+                    </a>
+                    {% endif %}
+
+                </div>
+                <div class="col-md-4 col-xs-4">
+                    <h5 class="text-center">Page: {{memData.number}} of {{memData.paginator.num_pages}}</h5>
+                </div>
+                <div class="col-md-4 col-xs-4">
+                    {%if memData.has_next%}
+                        <a href="?page={{memData.next_page_number}}">
+                            <button name = "post" class="btn btn-danger pull-right" type="submit">Next</button>  
+                        </a>
+                    {%endif%}    
+                </div>
+            </div>
+        </div>
+{% endblock body %}

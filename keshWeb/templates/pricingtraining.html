@@ -1,0 +1,45 @@
+{% extends 'index.html' %}
+{%block link%}
+    <li><a href="{%url 'home'%}">ABOUT</a></li>
+    <li><a href="{%url 'home'%}">SERVICES</a></li>
+    <li><a href="{%url 'home'%}">PRODUCT</a></li>
+    <li><a href="{%url 'home'%}">PRICING</a></li>
+    <li><a href="#training"> TRAINING</a></li>
+    <li><a href="{%url 'home'%}">CONTACT</a></li>
+{%endblock link%}
+{% block body %}
+    <div class="container" id="training">
+        <div class="jumbotron pricingJumbo text-center">
+            <h1>KESH GHAR</h1> 
+            <p>"Our pricing and traning package"</p>
+        </div>
+    </div>
+    <div class="container">
+        <table class="table table-striped">
+            <thead class="bg-warning text-center">
+                <tr>
+                    <th>TRAINING NAME & Package</th>
+                    <th>Total Pricing</th>
+                </tr>
+            </thead>
+            <tbody class="bg-warning">
+                <tr>
+                    <td>SHORT SPECIAL COURSE </td>
+                    <td>Starting from 2500</td>
+                </tr>
+
+                <tr>
+                    <td>BASIC COURSE  (3 Months) </td>
+                   
+                    <td>30000</td>
+                </tr>
+
+                <tr>
+                    <td>ADVANCE COURSE (6 Months)</td>
+                    <td>45000</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+{% endblock body %}
+    

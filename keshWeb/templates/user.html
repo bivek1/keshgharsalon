@@ -1,0 +1,9 @@
+{% extends 'dashboard.html' %}
+{% block linkandt %}
+<li><a  href="{%url 'transaction'%}" id="trans">TRANSATIONS</a></li>
+<li><a class= "logout" href="{%url 'logout'%}">LOG OUT</a></li>
+{% endblock linkandt %}    
+{% block body %}
+    {% include 'transaction.html' %}
+{% endblock body %}
+        

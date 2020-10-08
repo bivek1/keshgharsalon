@@ -1,0 +1,24 @@
+{% extends 'dashboard.html' %}
+
+
+{% block body %}
+  <br><br>
+    <h1 class="text-center"> Your members upcomming birthday list</h1>
+    <div class="row">
+        <div class="col-lg-3 col-xs-2">
+
+        </div>
+        <div class="col-lg-6 col-xs-8">
+            {% for i in da %}    
+                <div class="alert alert-info text-center">
+                    
+                    {{i.name}} has birthday on {{i.date_of_birth.day}} <sup>day</sup> and {{i.date_of_birth.month}} <sup>month</sup>
+                </div> 
+             {% endfor %}
+        </div>
+        <div class="col-lg-3 col-xs-2">
+        </div>
+    </div>
+          
+{% endblock body %}
+    

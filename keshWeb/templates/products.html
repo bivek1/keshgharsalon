@@ -1,0 +1,38 @@
+{% extends 'index.html' %}
+{% load static %}
+{%block link%}
+    <li><a href="{%url 'home'%}">ABOUT</a></li>
+    <li><a href="{%url 'home'%}">SERVICES</a></li>
+    <li><a href="#product">PRODUCT</a></li>
+    <li><a href="{%url 'home'%}">PRICING</a></li>
+    <li><a href="{%url 'home'%}"> TRAINING</a></li>
+    <li><a href="{%url 'home'%}">CONTACT</a></li>
+{%endblock link%}
+{% block body %}
+    <div class="container" id="product">
+        <div class="jumbotron pricingJumbo text-center">
+            <h1>KESH GHAR</h1> 
+            <p>"PRODUCTS INFORMATION"</p>
+        </div>
+    </div>
+    <div class="container">
+            {% for i in data  %}
+                <div class="col-md-3 col-xs-4">
+                    <div class="text-center product-card">
+                        <img class= "proimg" src=" 
+                        {% if i.product_Image %}
+                            {{i.product_Image.url}}
+                            {% else %}
+                            {%static 'res/kesh.png'%}
+                        {% endif %}
+                            
+                        " alt="KeshGhar Selling Product">
+                        <hr>
+                        <h4> {{i.product_name}}</h4>
+                        <P class="btn btn-warning text-center">Rs.{{i.product_price}}</P>
+                    </div>
+                </div>
+            {% endfor %}
+    </div>
+{% endblock body %}
+<br>
